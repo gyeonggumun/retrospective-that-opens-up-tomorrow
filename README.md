@@ -2,6 +2,8 @@
 
 **내일을 여는 회고**는 대학생이 저녁의 긍정적 사건과 원인을 기록하고, 다음 날 중요한 과제를 시작할 자신감을 점검하도록 돕는 React 웹앱입니다. 「긍정적 회고와 다음 날 자기효능감」 연구 프로토콜의 기록 절차를 저위험 개인 기록 흐름으로 옮겼습니다.
 
+공개 웹앱: [retrospective-that-opens-up-tomorro.vercel.app](https://retrospective-that-opens-up-tomorro.vercel.app)
+
 ## 기능
 
 - 저녁 회고: 잘된 일 또는 감사했던 일 3개와 이유, 기여 태그 기록
