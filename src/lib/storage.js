@@ -47,5 +47,5 @@ export function downloadCsv(entries) {
   anchor.href = url;
   anchor.download = 'positive-reflection-records.csv';
   anchor.click();
-  URL.revokeObjectURL(url);
+  window.setTimeout(() => URL.revokeObjectURL(url), 0);
 }
