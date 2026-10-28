@@ -33,10 +33,14 @@ export default function MorningCheckIn({ entry, onSave }) {
   function saveMorning(event) {
     event.preventDefault();
     if (morning.task.trim().length < 2) {
-      setMessage('내일 또는 오늘의 중요한 과제를 짧게 적어 주세요.');
+      setMessage('선택한 날짜의 중요한 과제를 두 글자 이상 적어 주세요.');
       return;
     }
-    onSave({ morning, morningCompletedAt: new Date().toISOString() });
+    if (morning.sleepHours !== '' && (!Number.isFinite(Number(morning.sleepHours)) || Number(morning.sleepHours) < 0 || Number(morning.sleepHours) > 24)) {
+      setMessage('수면 시간은 0~24 사이로 입력하거나 비워 주세요.');
+      return;
+    }
+    if (!onSave({ morning: { ...morning, questionVersion: 'initiation-v2' }, morningCompletedAt: new Date().toISOString(), morningTimezoneOffset: new Date().getTimezoneOffset() })) return;
     setMessage('아침 체크인을 이 기기에 저장했습니다.');
   }
 
@@ -52,7 +56,8 @@ export default function MorningCheckIn({ entry, onSave }) {
           오늘의 가장 중요한 과제
           <input value={morning.task} onChange={(event) => update('task', event.target.value)} placeholder="예: 오전에 프로젝트 발표 자료의 첫 장을 완성하기" />
         </label>
-        <ScaleInput id="efficacy" label="이 과제를 시작하고 필요한 노력을 계속할 자신" value={morning.efficacy} onChange={(value) => update('efficacy', value)} help="0은 전혀 없음, 10은 매우 높음" />
+        {entry?.morning && !entry.morning.questionVersion && <p className="research-note">이 기록은 이전 문항(시작하고 노력을 계속할 자신)으로 작성되었습니다. 다시 저장하면 현재 문항으로 갱신됩니다.</p>}
+        <ScaleInput id="efficacy" label="이 과제의 첫 행동을 시작할 자신" value={morning.efficacy} onChange={(value) => update('efficacy', value)} help="0은 전혀 없음, 10은 매우 높음" />
         <div className="scale-grid">
           <ScaleInput id="positive-affect" label="현재 긍정 정서" value={morning.positiveAffect} onChange={(value) => update('positiveAffect', value)} />
           <ScaleInput id="negative-affect" label="현재 부정 정서" value={morning.negativeAffect} onChange={(value) => update('negativeAffect', value)} />

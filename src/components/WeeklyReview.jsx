@@ -1,6 +1,4 @@
-function formatDate(date) {
-  return new Intl.DateTimeFormat('ko-KR', { month: 'numeric', day: 'numeric', weekday: 'short' }).format(new Date(`${date}T00:00:00`));
-}
+import { formatDate, pairFor } from '../lib/dates';
 
 export default function WeeklyReview({ entries, onExport, onClear }) {
   const recentEntries = [...entries].sort((left, right) => right.date.localeCompare(left.date)).slice(0, 7);
@@ -16,17 +14,19 @@ export default function WeeklyReview({ entries, onExport, onClear }) {
         <p className="empty-state">아직 저장된 기록이 없습니다. 저녁 회고 또는 아침 체크인을 남기면 이곳에서 확인할 수 있어요.</p>
       ) : (
         <ol className="record-list">
-          {recentEntries.map((entry) => (
+          {recentEntries.map((entry) => {
+            const pair = pairFor(entries, entry.date);
+            return (
             <li key={entry.date}>
               <div>
                 <strong>{formatDate(entry.date)}</strong>
                 <span>{entry.eveningStatus === 'completed' ? '저녁 회고 완료' : entry.eveningStatus === 'skipped' ? '저녁 회고 건너뜀' : '저녁 회고 없음'}</span>
               </div>
               <div className="score">
-                {entry.morning ? <><span>자신감</span><strong>{entry.morning.efficacy}</strong><span>/ 10</span></> : <span>아침 체크인 없음</span>}
+                {pair.morning ? <><span>{formatDate(pair.morningDate)} 아침 자신감</span><strong>{pair.morning.efficacy}</strong><span>/ 10</span></> : <span>다음 날 아침 체크인 없음</span>}
               </div>
             </li>
-          ))}
+          ); })}
         </ol>
       )}
       <div className="form-actions">

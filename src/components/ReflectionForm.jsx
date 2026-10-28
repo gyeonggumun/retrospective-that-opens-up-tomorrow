@@ -35,12 +35,12 @@ export default function ReflectionForm({ entry, onSave }) {
       setMessage('두 개 이상의 항목에 10자 이상의 사건과 이유를 적어 주세요. 오늘 기록을 쉬고 싶다면 건너뛰기를 선택할 수 있습니다.');
       return;
     }
-    onSave({ reflection: { items }, eveningStatus: 'completed', reflectionCompletedAt: new Date().toISOString() });
+    if (!onSave({ reflection: { items }, eveningStatus: 'completed', reflectionCompletedAt: new Date().toISOString(), reflectionTimezoneOffset: new Date().getTimezoneOffset() })) return;
     setMessage('저녁 회고를 이 기기에 저장했습니다.');
   }
 
   function skipReflection() {
-    onSave({ eveningStatus: 'skipped', skippedAt: new Date().toISOString() });
+    if (!onSave({ eveningStatus: 'skipped', skippedAt: new Date().toISOString(), reflectionTimezoneOffset: new Date().getTimezoneOffset() })) return;
     setMessage('오늘의 회고를 건너뛰었습니다. 기록하지 않아도 괜찮습니다.');
   }
 
