@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 function morningFromEntry(entry) {
   return entry?.morning ?? { task: '', efficacy: 5, positiveAffect: 5, negativeAffect: 5, difficulty: 5, sleepHours: '' };
@@ -17,30 +17,34 @@ function ScaleInput({ id, label, value, onChange, help }) {
   );
 }
 
-export default function MorningCheckIn({ entry, onSave }) {
-  const [morning, setMorning] = useState(() => morningFromEntry(entry));
+export default function MorningCheckIn({ entry, draft, onDraft, onSave }) {
+  const [morning, setMorning] = useState(() => draft ?? morningFromEntry(entry));
   const [message, setMessage] = useState('');
-
-  useEffect(() => {
-    setMorning(morningFromEntry(entry));
-    setMessage('');
-  }, [entry]);
+  const [invalid, setInvalid] = useState(false);
+  const [draftStatus, setDraftStatus] = useState(draft ? '작성 중인 내용을 불러왔습니다. 임시 저장은 체크인 완료로 집계하지 않습니다.' : '입력하면 이 기기에 자동으로 임시 저장합니다.');
 
   function update(field, value) {
-    setMorning((current) => ({ ...current, [field]: value }));
+    const next = { ...morning, [field]: value };
+    setMorning(next);
+    setDraftStatus(onDraft(next) ? '작성 중 · 이 기기에 임시 저장됨' : '임시 저장 실패 · 입력 내용을 복사해 보관해 주세요.');
+    setMessage('');
   }
 
   function saveMorning(event) {
     event.preventDefault();
     if (morning.task.trim().length < 2) {
+      setInvalid(true);
       setMessage('선택한 날짜의 중요한 과제를 두 글자 이상 적어 주세요.');
       return;
     }
     if (morning.sleepHours !== '' && (!Number.isFinite(Number(morning.sleepHours)) || Number(morning.sleepHours) < 0 || Number(morning.sleepHours) > 24)) {
+      setInvalid(true);
       setMessage('수면 시간은 0~24 사이로 입력하거나 비워 주세요.');
       return;
     }
     if (!onSave({ morning: { ...morning, questionVersion: 'initiation-v2' }, morningCompletedAt: new Date().toISOString(), morningTimezoneOffset: new Date().getTimezoneOffset() })) return;
+    setInvalid(false);
+    setDraftStatus('저장 완료 · 다시 수정하면 임시 저장됩니다.');
     setMessage('아침 체크인을 이 기기에 저장했습니다.');
   }
 
@@ -52,9 +56,10 @@ export default function MorningCheckIn({ entry, onSave }) {
         <p>점수는 진단이나 평가가 아닙니다. 오늘의 상태를 기록하는 관찰값입니다.</p>
       </div>
       <form onSubmit={saveMorning} noValidate>
+        <p className="draft-status" role="status">{draftStatus}</p>
         <label>
           오늘의 가장 중요한 과제
-          <input value={morning.task} onChange={(event) => update('task', event.target.value)} placeholder="예: 오전에 프로젝트 발표 자료의 첫 장을 완성하기" />
+          <input maxLength="1000" value={morning.task} onChange={(event) => update('task', event.target.value)} placeholder="예: 오전에 프로젝트 발표 자료의 첫 장을 완성하기" />
         </label>
         {entry?.morning && !entry.morning.questionVersion && <p className="research-note">이 기록은 이전 문항(시작하고 노력을 계속할 자신)으로 작성되었습니다. 다시 저장하면 현재 문항으로 갱신됩니다.</p>}
         <ScaleInput id="efficacy" label="이 과제의 첫 행동을 시작할 자신" value={morning.efficacy} onChange={(value) => update('efficacy', value)} help="0은 전혀 없음, 10은 매우 높음" />
@@ -70,7 +75,7 @@ export default function MorningCheckIn({ entry, onSave }) {
         <div className="form-actions">
           <button className="button primary" type="submit">아침 체크인 저장</button>
         </div>
-        {message && <p className="form-message" role="status">{message}</p>}
+        {message && <p className={invalid ? 'error-message' : 'form-message'} role={invalid ? 'alert' : 'status'}>{message}</p>}
       </form>
     </section>
   );
