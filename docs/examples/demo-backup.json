@@ -1,0 +1,18 @@
+{
+  "app": "retrospective-that-opens-up-tomorrow",
+  "schemaVersion": 2,
+  "description": "포트폴리오 캡처용 가상 기록입니다. 연구 참여자 데이터나 효과 검증 결과가 아닙니다.",
+  "entries": [
+    { "date": "2026-10-23", "morning": { "task": "[예시] 읽은 논문의 질문 정리하기", "efficacy": 4, "positiveAffect": 5, "negativeAffect": 4, "difficulty": 6, "sleepHours": "7" } },
+    { "date": "2026-10-24", "morning": { "task": "[예시] 오늘의 학습 목표 정하기", "efficacy": 6, "positiveAffect": 6, "negativeAffect": 3, "difficulty": 5, "sleepHours": "7.5" } },
+    { "date": "2026-10-25", "eveningStatus": "skipped" },
+    { "date": "2026-10-26", "eveningStatus": "completed", "taskStarted": "yes", "reflection": { "items": [
+      { "event": "[예시] 어려웠던 코드의 흐름을 직접 정리했다.", "reason": "작은 함수부터 차례로 읽고 메모했다.", "tags": ["내 행동"] },
+      { "event": "[예시] 팀원과 서로의 진행 상황을 공유했다.", "reason": "서로 질문할 수 있는 시간을 마련했다.", "tags": ["내 행동", "타인의 도움"] },
+      { "event": "", "reason": "", "tags": [] }
+    ] }, "morning": { "task": "[예시] 기록 저장 흐름 점검하기", "efficacy": 7, "positiveAffect": 6, "negativeAffect": 3, "difficulty": 5, "sleepHours": "7", "questionVersion": "initiation-v2" } },
+    { "date": "2026-10-27", "eveningStatus": "skipped", "morning": { "task": "[예시] 발표의 핵심 메시지 정하기", "efficacy": 5, "positiveAffect": 5, "negativeAffect": 4, "difficulty": 6, "sleepHours": "6.5", "questionVersion": "initiation-v2" } },
+    { "date": "2026-10-29", "morning": { "task": "[예시] 포트폴리오 구성 다듬기", "efficacy": 8, "positiveAffect": 7, "negativeAffect": 2, "difficulty": 4, "sleepHours": "7.5", "questionVersion": "initiation-v2" } }
+  ],
+  "drafts": {}
+}
