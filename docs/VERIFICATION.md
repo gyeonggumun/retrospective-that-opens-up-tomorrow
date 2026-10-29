@@ -51,7 +51,21 @@
 
 ## 배포 확인
 
-GitHub main push에 연결된 Vercel 자동 배포를 사용합니다. 최종 배포 결과는 아래에 기록합니다.
+GitHub main push에 연결된 Vercel 자동 배포를 확인했습니다.
+
+| 항목 | 확인 결과 |
+| --- | --- |
+| 공개 주소 | [내일을 여는 회고](https://retrospective-that-opens-up-tomorro.vercel.app/) |
+| 검증한 구현 버전 | `b20afec59ae1d67a6ecb94941f301798a2f47a0f` |
+| Vercel | `READY` · production · `source: git` · main |
+| 배포 ID | `dpl_8Gou1Ag49pURAcd5uzFCq1at6K1j` |
+| 빌드 소요 | 약 6.6초 (buildingAt → ready) |
+| GitHub Actions | [회고 앱 검증 #1 성공](https://github.com/gyeonggumun/retrospective-that-opens-up-tomorrow/actions/runs/40900522644) |
+| 공개 화면 | 홈·설정·JSON 파일 선택·그래프 1개·달력 14일 표시 확인 |
+| 배포 자산 | 공개 페이지가 로컬 빌드와 같은 `/assets/index-DvAnvWfW.js` 로드 |
+| 배포 후 오류 확인 | 브라우저 콘솔 오류 0건; 서버 함수가 없는 정적 앱이므로 함수 런타임 로그는 검증 대상에 해당하지 않음 |
+
+위 버전에 대한 검증 결과를 문서로 남겼습니다. 이후 문서 변경도 동일한 push → 검증·배포 흐름을 사용합니다.
 
 ## 범위와 한계
 
