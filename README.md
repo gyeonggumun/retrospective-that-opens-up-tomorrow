@@ -102,9 +102,9 @@ JSON은 작성한 내용과 임시 저장을 백업하고, CSV는 저장을 마�
 
 좁은 화면에서는 카드와 입력 영역을 세로로 배치하고 달력 열 수를 줄입니다. 그래프 내부에 가로 스크롤을 제공해 페이지 전체의 가로 넘침을 방지했습니다.
 
-| 모바일 홈 | 모바일 돌아보기 |
+| 모바일 홈 | 모바일 아침 체크인 |
 | --- | --- |
-| <img src="docs/images/home-mobile.jpg" alt="모바일 홈 화면" width="300" /> | <img src="docs/images/review-mobile.jpg" alt="모바일 그래프와 기록 달력" width="300" /> |
+| <img src="docs/images/home-mobile.jpg" alt="모바일 홈 전체 화면" width="300" /> | <img src="docs/images/record-mobile.jpg" alt="모바일 아침 체크인 전체 화면" width="300" /> |
 
 ## 함께 작성한 연구 논문
 
