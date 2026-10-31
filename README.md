@@ -8,6 +8,17 @@
 
 관련 논문: [「대학생의 저녁 긍정적 회고와 다음 날 과제 시작 자기효능감의 시간적 연관성」](https://positive-reflection-research-paper.vercel.app/) · [논문 저장소](https://github.com/gyeonggumun/positive-reflection-research-paper)
 
+## 기능 시연 영상
+
+실제 앱 조작 화면을 촬영하고 자막·화면 이동·장면별 설명 시간을 더한 편집 시연입니다. 가상 예시 기록을 사용했습니다. 두 영상 모두 1920×1080, 30fps의 무음 MP4입니다.
+
+| 회고와 아침 체크인 · 약 1분 | 기록 분석과 백업·복원 · 약 1분 |
+| --- | --- |
+| [![회고와 아침 체크인 영상 보기](docs/videos/daily-ritual-poster.jpg)](docs/videos/daily-ritual.mp4) | [![기록 분석과 백업·복원 영상 보기](docs/videos/review-backup-poster.jpg)](docs/videos/review-backup.mp4) |
+| 저녁 사건·이유·태그 → 아침 목표·자신감 → 저장 확인 | 14일 그래프·표 → 달력·날짜 상세 → 검색 → JSON·CSV·복원 |
+
+이미지를 누르면 영상 파일을 열 수 있습니다. GitHub에서 바로 재생되지 않으면 파일을 다운로드해 재생해 주세요.
+
 ## 주요 기능
 
 **홈에서 상태 확인 → 저녁 회고·아침 체크인 → 기록 돌아보기 → 백업·관리** 흐름으로 사용합니다. 로그인·서버 전송 없이 이 브라우저의 `localStorage`에 기록을 저장합니다.
